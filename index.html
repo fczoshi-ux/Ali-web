@@ -1,200 +1,575 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Cleaner Generator</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .container {
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            width: 100%;
-            max-width: 600px;
-            padding: 30px 25px;
-        }
-        h1 {
-            color: #2d3748;
-            text-align: center;
-            margin-bottom: 8px;
-            font-size: 24px;
-        }
-        .sub-title {
-            text-align: center;
-            color: #718096;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-        textarea {
-            width: 100%;
-            height: 120px;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 15px;
-            resize: none;
-            margin-bottom: 15px;
-            transition: border 0.3s;
-        }
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        button {
-            flex: 1;
-            min-width: 120px;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: transform 0.2s, opacity 0.2s;
-        }
-        button:hover {
-            transform: translateY(-2px);
-        }
-        button:active {
-            transform: translateY(0);
-        }
-        .btn-clean {
-            background: #667eea;
-            color: white;
-        }
-        .btn-copy {
-            background: #48bb78;
-            color: white;
-        }
-        .btn-clear {
-            background: #f56565;
-            color: white;
-        }
-        .result-box {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 15px;
-            word-break: break-all;
-            font-size: 14px;
-            color: #2d3748;
-            min-height: 60px;
-            margin-bottom: 10px;
-        }
-        .info {
-            font-size: 12px;
-            color: #718096;
-            margin-top: 10px;
-            text-align: center;
-        }
-        .success {
-            background: #c6f6d5;
-            color: #22543d;
-            padding: 8px;
-            border-radius: 6px;
-            text-align: center;
-            margin-bottom: 10px;
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ali Store - Text Cleaner</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #eef6ff, #ffffff);
+      color: #111827;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    }
+
+    .profile {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile img {
+      width: 95px;
+      height: 95px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #1677ff;
+      margin-bottom: 12px;
+    }
+
+    .profile h1 {
+      margin: 5px 0;
+      font-size: 22px;
+      color: #1677ff;
+    }
+
+    .profile h2 {
+      margin: 5px 0;
+      font-size: 25px;
+    }
+
+    .profile p {
+      margin: 8px 0 0;
+      color: #667085;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      resize: vertical;
+      border: 2px solid #dbe7f5;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #1677ff;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #1677ff;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .clear {
+      background: #eaf2ff;
+      color: #1677ff;
+    }
+
+    .result {
+      margin-top: 22px;
+    }
+
+    #result {
+      min-height: 130px;
+      background: #f7faff;
+      white-space: pre-wrap;
+      word-break: break-word;
+      border: 2px solid #dbe7f5;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 14px;
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+      margin-top: 22px;
+      text-align: center;
+    }
+
+    .feature {
+      flex: 1;
+      padding: 12px 5px;
+      background: #f5f9ff;
+      border-radius: 12px;
+    }
+
+    .feature b {
+      display: block;
+      color: #1677ff;
+      margin-bottom: 4px;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 12px;
+      background: #f8fafc;
+      color: #667085;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 18px;
+      color: #667085;
+      font-size: 13px;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      .profile h1 {
+        font-size: 18px;
+      }
+
+      .profile h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>🧹 Link Cleaner Generator</h1>
-        <p class="sub-title">Hapus pelacak, parameter sampah & bersihkan tautan Anda</p>
 
-        <div class="success" id="successMsg">✅ Berhasil disalin ke papan klip!</div>
+  <div class="container">
+    <div class="card">
 
-        <textarea id="inputLink" placeholder="Tempel tautan di sini... Contoh: https://example.com/produk?id=123&utm_source=fb&fbclid=abc123"></textarea>
+      <div class="profile">
+        <img
+          src="https://files.catbox.moe/tk5k3q.jpg"
+          alt="Ali Store"
+        >
 
-        <div class="btn-group">
-            <button class="btn-clean" onclick="bersihkanLink()">✨ Bersihkan Tautan</button>
-            <button class="btn-copy" onclick="salinHasil()">📋 Salin Hasil</button>
-            <button class="btn-clear" onclick="kosongkanSemua()">🗑️ Kosongkan</button>
+        <h1>papipapipum aku akan mengejutkanmu dengan kehebatanku</h1>
+        <h2>WELCOME TO</h2>
+        <p>ALI STORE</p>
+        <p>♡ Alight Creative Text Cleaner For Generator ♡</p>
+      </div>
+
+      <label>TEXT CLEANER</label>
+      <p>Tempel source email kamu di bawah ini</p>
+
+      <label>SOURCE TEXT</label>
+
+      <textarea
+        id="source"
+        placeholder="Tempel source text kamu di sini..."
+      ></textarea>
+
+      <button onclick="cleanText()">✦ GENERATE</button>
+      <button class="clear" onclick="clearText()">CLEAR</button>
+
+      <div class="result">
+        <label>RESULT</label>
+        <p>Link Alight Creative yang ditemukan</p>
+
+        <div id="result"></div>
+
+        <button onclick="copyResult()">COPY</button>
+      </div>
+
+      <div class="note">
+        Cleaner ini membantu membersihkan karakter tersembunyi,
+        spasi berlebihan, line break yang berantakan, dan format
+        text tertentu agar lebih mudah dibaca.
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <b>FAST</b>
+          Cepat
         </div>
 
-        <div class="result-box" id="hasilLink">Hasil tautan bersih akan muncul di sini...</div>
+        <div class="feature">
+          <b>CLEAN</b>
+          Bersih
+        </div>
 
-        <p class="info">⚠️ Catatan: Tidak mengubah isi tujuan tautan, hanya membuang kode pelacak & parameter tambahan.</p>
+        <div class="feature">
+          <b>PRIVATE</b>
+          Privat
+        </div>
+      </div>
+
+      <footer>
+        Ali Store  · TEXT CLEANER
+      </footer>
+
     </div>
+  </div>
 
-    <script>
-        const DAFTAR_HAPUS = [
-            'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
-            'fbclid', 'gclid', 'igshid', 'ref', 'source', 'from', 'mc_eid',
-            'mc_cid', 'yclid', 'twclid', 'spm', 'usqp', 'ved',
-            'sa', 'srsltid', 'mkt_tok', 'lkid', 'hsa_cam', 'hsa_ad',
-            'hsa_grp', 'hsa_kw', 'hsa_mt', 'hsa_net', 'hsa_src'
-        ];
+  <<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ali Store - Text Cleaner</title>
 
-        function bersihkanLink() {
-            let input = document.getElementById('inputLink').value.trim();
-            if (!input) {
-                alert('⚠️ Masukkan tautan terlebih dahulu!');
-                return;
-            }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-            try {
-                const url = new URL(input);
-                const params = new URLSearchParams(url.search);
-                DAFTAR_HAPUS.forEach(key => params.delete(key));
-                url.search = params.toString();
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #eef6ff, #ffffff);
+      color: #111827;
+      padding: 20px;
+    }
 
-                let hasilBersih = url.toString();
-                if (url.search === '') hasilBersih = hasilBersih.replace('?', '');
-                document.getElementById('hasilLink').textContent = hasilBersih;
-            } catch (err) {
-                alert('❌ Tautan tidak valid! Pastikan dimulai dengan http:// atau https://');
-            }
-        }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
 
-        async function salinHasil() {
-            const hasil = document.getElementById('hasilLink').textContent;
-            if (!hasil || hasil.includes('akan muncul di sini')) {
-                alert('⚠️ Belum ada hasil untuk disalin!');
-                return;
-            }
-            try {
-                await navigator.clipboard.writeText(hasil);
-                const msg = document.getElementById('successMsg');
-                msg.style.display = 'block';
-                setTimeout(() => msg.style.display = 'none', 2500);
-            } catch (err) {
-                const textArea = document.createElement('textarea');
-                textArea.value = hasil;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                const msg = document.getElementById('successMsg');
-                msg.style.display = 'block';
-                setTimeout(() => msg.style.display = 'none', 2500);
-            }
-        }
+    .card {
+      background: white;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    }
 
-        function kosongkanSemua() {
-            document.getElementById('inputLink').value = '';
-            document.getElementById('hasilLink').textContent = 'Hasil tautan bersih akan muncul di sini...';
-        }
-    </script>
+    .profile {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile img {
+      width: 95px;
+      height: 95px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #1677ff;
+      margin-bottom: 12px;
+    }
+
+    .profile h1 {
+      margin: 5px 0;
+      font-size: 22px;
+      color: #1677ff;
+    }
+
+    .profile h2 {
+      margin: 5px 0;
+      font-size: 25px;
+    }
+
+    .profile p {
+      margin: 8px 0 0;
+      color: #667085;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      resize: vertical;
+      border: 2px solid #dbe7f5;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #1677ff;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #1677ff;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .clear {
+      background: #eaf2ff;
+      color: #1677ff;
+    }
+
+    .result {
+      margin-top: 22px;
+    }
+
+    #result {
+      min-height: 130px;
+      background: #f7faff;
+      white-space: pre-wrap;
+      word-break: break-word;
+      border: 2px solid #dbe7f5;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 14px;
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+      margin-top: 22px;
+      text-align: center;
+    }
+
+    .feature {
+      flex: 1;
+      padding: 12px 5px;
+      background: #f5f9ff;
+      border-radius: 12px;
+    }
+
+    .feature b {
+      display: block;
+      color: #1677ff;
+      margin-bottom: 4px;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 12px;
+      background: #f8fafc;
+      color: #667085;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 18px;
+      color: #667085;
+      font-size: 13px;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      .profile h1 {
+        font-size: 18px;
+      }
+
+      .profile h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="card">
+
+      <div class="profile">
+        <img
+          src="https://files.catbox.moe/tk5k3q.jpg"
+          alt="Ali Store"
+        >
+
+        <h1>papipapipum aku akan mengejutkanmu dengan kehebatanku</h1>
+        <h2>WELCOME TO</h2>
+        <p>ALI STORE</p>
+        <p>♡ Alight Creative Text Cleaner For Generator ♡</p>
+      </div>
+
+      <label>TEXT CLEANER</label>
+      <p>Tempel source email kamu di bawah ini</p>
+
+      <label>SOURCE TEXT</label>
+
+      <textarea
+        id="source"
+        placeholder="Tempel source text kamu di sini..."
+      ></textarea>
+
+      <button onclick="cleanText()">✦ GENERATE</button>
+      <button class="clear" onclick="clearText()">CLEAR</button>
+
+      <div class="result">
+        <label>RESULT</label>
+        <p>Link Alight Creative yang ditemukan</p>
+
+        <div id="result"></div>
+
+        <button onclick="copyResult()">COPY</button>
+      </div>
+
+      <div class="note">
+        Cleaner ini membantu membersihkan karakter tersembunyi,
+        spasi berlebihan, line break yang berantakan, dan format
+        text tertentu agar lebih mudah dibaca.
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <b>FAST</b>
+          Cepat
+        </div>
+
+        <div class="feature">
+          <b>CLEAN</b>
+          Bersih
+        </div>
+
+        <div class="feature">
+          <b>PRIVATE</b>
+          Privat
+        </div>
+      </div>
+
+      <footer>
+        Ali Store  · TEXT CLEANER
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    function cleanText() {
+      let text = document.getElementById("source").value;
+
+      text = text
+        .replace(/[\u200B-\u200D\uFEFF]/g, "")
+        .replace(/\r\n/g, "\n")
+        .replace(/[ \t]+/g, " ")
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
+
+      document.getElementById("result").textContent = text;
+    }
+
+    function clearText() {
+      document.getElementById("source").value = "";
+      document.getElementById("result").textContent = "";
+    }
+
+    function copyResult() {
+      const result = document.getElementById("result").textContent;
+
+      if (!result) {
+        alert("Belum ada hasil untuk dicopy.");
+        return;
+      }
+
+      navigator.clipboard.writeText(result)
+        .then(() => {
+          alert("Result berhasil dicopy!");
+        })
+        .catch(() => {
+          alert("Gagal menyalin result.");
+        });
+    }
+  </script>
+
 </body>
-</html>
+</html>>
+    function cleanText() {
+      let text = document.getElementById("source").value;
+
+      text = text
+        .replace(/[\u200B-\u200D\uFEFF]/g, "")
+        .replace(/\r\n/g, "\n")
+        .replace(/[ \t]+/g, " ")
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
+
+      document.getElementById("result").textContent = text;
+    }
+
+    function clearText() {
+      document.getElementById("source").value = "";
+      document.getElementById("result").textContent = "";
+    }
+
+    function copyResult() {
+      const result = document.getElementById("result").textContent;
+
+      if (!result) {
+        alert("Belum ada hasil untuk dicopy.");
+        return;
+      }
+
+      navigator.clipboard.writeText(result)
+        .then(() => {
+          alert("Result berhasil dicopy!");
+        })
+        .catch(() => {
+          alert("Gagal menyalin result.");
+        });
+    }
+  </script>
+
+</body>
+          </html>
