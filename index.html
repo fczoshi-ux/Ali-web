@@ -3,222 +3,302 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ali Store - Text Cleaner</title>
+<title>ALI STORE — Text Cleaner</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-  background: linear-gradient(135deg, #eef5ff, #ffffff);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f4f8ff;
+  color:#182235;
 }
 
-.container {
-  background: #ffffff;
-  border-radius: 22px;
-  width: 100%;
-  max-width: 600px;
-  padding: 28px 25px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.10);
+.container{
+  width:100%;
+  max-width:700px;
+  margin:auto;
 }
 
-.profile {
-  text-align: center;
-  margin-bottom: 25px;
+/* ===== BANNER ===== */
+
+.banner{
+  width:100%;
+  height:330px;
+  position:relative;
+  overflow:hidden;
+  background:#dcecff;
 }
 
-.profile img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 4px solid #1677ff;
-  display: block;
-  margin: 0 auto 14px;
+.banner img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
-.profile h1 {
-  color: #1677ff;
-  font-size: 20px;
-  line-height: 1.2;
-  margin-bottom: 10px;
+.banner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.05),
+    rgba(0,0,0,.18)
+  );
 }
 
-.profile h2 {
-  color: #111827;
-  font-size: 25px;
-  margin-bottom: 8px;
+.banner-title{
+  position:absolute;
+  z-index:2;
+  left:22px;
+  bottom:24px;
+  color:white;
+  font-size:48px;
+  font-weight:900;
+  text-shadow:0 3px 12px rgba(0,0,0,.55);
 }
 
-.profile p {
-  color: #718096;
-  font-size: 15px;
-  margin-bottom: 7px;
+/* ===== HEADER ===== */
+
+.header{
+  text-align:center;
+  padding:40px 18px 30px;
+  background:white;
 }
 
-.title {
-  color: #111827;
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 8px;
+.top-text{
+  color:#1677ff;
+  font-size:17px;
+  font-weight:bold;
+  line-height:1.5;
+  margin-bottom:22px;
 }
 
-.subtitle {
-  color: #718096;
-  font-size: 14px;
-  margin-bottom: 20px;
+.welcome{
+  color:#8d98aa;
+  font-size:20px;
+  font-weight:bold;
+  letter-spacing:6px;
+  margin-bottom:10px;
 }
 
-label {
-  display: block;
-  font-weight: 700;
-  font-size: 15px;
-  margin-bottom: 8px;
+.store{
+  font-size:52px;
+  font-weight:900;
+  letter-spacing:-2px;
+  color:#182235;
 }
 
-textarea {
-  width: 100%;
-  height: 140px;
-  padding: 15px;
-  border: 2px solid #dbe8f8;
-  border-radius: 14px;
-  font-size: 15px;
-  resize: vertical;
-  outline: none;
-  transition: 0.2s;
+.store span{
+  color:#1677ff;
 }
 
-textarea:focus {
-  border-color: #1677ff;
+.line{
+  margin:20px auto;
+  width:150px;
+  height:3px;
+  background:#1677ff;
+  border-radius:10px;
 }
 
-.btn-group {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
+.description{
+  color:#738097;
+  font-size:17px;
+  font-weight:bold;
 }
 
-button {
-  flex: 1;
-  padding: 13px 15px;
-  border: none;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  background: #1677ff;
-  color: white;
+/* ===== CARD ===== */
+
+.card{
+  margin:0 18px 28px;
+  padding:32px 25px;
+  background:white;
+  border-radius:28px;
+  box-shadow:0 10px 35px rgba(32,85,160,.10);
 }
 
-button:hover {
-  opacity: 0.9;
+.card h2{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:10px;
 }
 
-.clear-btn {
-  background: #eaf2ff;
-  color: #1677ff;
+.subtitle{
+  text-align:center;
+  color:#8a95a8;
+  font-size:16px;
+  margin-bottom:32px;
 }
 
-.result-section {
-  margin-top: 25px;
+label{
+  display:block;
+  font-size:15px;
+  font-weight:900;
+  letter-spacing:2px;
+  margin-bottom:10px;
 }
 
-.result-box {
-  width: 100%;
-  min-height: 120px;
-  background: #f7faff;
-  border: 2px solid #dbe8f8;
-  border-radius: 14px;
-  padding: 15px;
-  white-space: pre-wrap;
-  word-break: break-word;
-  font-size: 14px;
-  color: #111827;
+textarea{
+  width:100%;
+  height:190px;
+  resize:vertical;
+  padding:17px;
+  border:2px solid #dce5f0;
+  border-radius:18px;
+  outline:none;
+  font-size:15px;
+  font-family:Arial,sans-serif;
+  background:#fbfdff;
 }
 
-.copy-btn {
-  width: 100%;
-  margin-top: 12px;
+textarea:focus{
+  border-color:#1677ff;
 }
 
-.note {
-  margin-top: 25px;
-  padding: 16px;
-  border-radius: 14px;
-  background: #f8fafc;
-  color: #718096;
-  font-size: 13px;
-  line-height: 1.7;
+.buttons{
+  display:flex;
+  gap:10px;
+  margin-top:13px;
 }
 
-.features {
-  display: flex;
-  gap: 10px;
-  margin-top: 25px;
+button{
+  flex:1;
+  border:0;
+  padding:15px;
+  border-radius:13px;
+  background:#1677ff;
+  color:white;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.feature {
-  flex: 1;
-  text-align: center;
-  background: #f5f9ff;
-  border-radius: 14px;
-  padding: 15px 5px;
+button.clear{
+  background:#e9f2ff;
+  color:#1677ff;
 }
 
-.feature b {
-  display: block;
-  color: #1677ff;
-  font-size: 20px;
-  margin-bottom: 5px;
+/* ===== RESULT ===== */
+
+.result-label{
+  margin-top:30px;
 }
 
-.feature span {
-  font-size: 14px;
-  color: #111827;
+.result-info{
+  color:#8a95a8;
+  font-size:14px;
+  margin-bottom:10px;
 }
 
-footer {
-  text-align: center;
-  color: #718096;
-  margin-top: 25px;
-  font-size: 14px;
+.result{
+  min-height:120px;
+  padding:16px;
+  border:2px solid #dce5f0;
+  border-radius:18px;
+  background:#fbfdff;
+  white-space:pre-wrap;
+  word-break:break-word;
+  font-size:14px;
 }
 
-@media (max-width: 480px) {
-  body {
-    padding: 12px;
+.copy{
+  width:100%;
+  margin-top:12px;
+}
+
+.note{
+  margin-top:22px;
+  padding:17px;
+  border-radius:17px;
+  background:#f1f6ff;
+  color:#6e7b91;
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* ===== FEATURES ===== */
+
+.features{
+  display:flex;
+  gap:9px;
+  margin-top:20px;
+}
+
+.feature{
+  flex:1;
+  text-align:center;
+  background:#f5f8fd;
+  border-radius:15px;
+  padding:15px 5px;
+}
+
+.feature strong{
+  display:block;
+  color:#1677ff;
+  font-size:17px;
+  margin-bottom:4px;
+}
+
+.feature span{
+  color:#7c8799;
+  font-size:12px;
+}
+
+footer{
+  text-align:center;
+  color:#8a95a8;
+  padding:5px 0 30px;
+  font-size:13px;
+}
+
+/* ===== HP ===== */
+
+@media(max-width:500px){
+
+  .banner{
+    height:290px;
   }
 
-  .container {
-    padding: 22px 18px;
+  .banner-title{
+    font-size:38px;
+    left:18px;
+    bottom:18px;
   }
 
-  .profile h1 {
-    font-size: 17px;
+  .top-text{
+    font-size:16px;
   }
 
-  .profile h2 {
-    font-size: 23px;
+  .welcome{
+    font-size:17px;
+    letter-spacing:4px;
   }
 
-  .features {
-    gap: 7px;
+  .store{
+    font-size:43px;
   }
 
-  .feature {
-    padding: 13px 3px;
+  .description{
+    font-size:15px;
   }
 
-  .feature b {
-    font-size: 18px;
+  .card{
+    margin:0 12px 25px;
+    padding:27px 17px;
+    border-radius:24px;
+  }
+
+  .card h2{
+    font-size:31px;
+  }
+
+  .buttons{
+    flex-direction:column;
   }
 }
 </style>
@@ -228,112 +308,143 @@ footer {
 
 <div class="container">
 
-  <div class="profile">
-
+  <!-- FOTO BANNER -->
+  <div class="banner">
     <img
       src="https://files.catbox.moe/tk5k3q.jpg"
       alt="Ali Store"
     >
 
-    <h1>papipapipum aku akan mengejutkanmu dengan kehebatanku</h1>
+    <div class="banner-title">
+      Ali bnget
+    </div>
+  </div>
 
-    <h2>WELCOME TO</h2>
 
-    <p>ALI STORE</p>
+  <!-- HEADER -->
+  <div class="header">
 
-    <p>♡ Alight Creative Text Cleaner For Generator ♡</p>
+    <div class="top-text">
+      papipapipum aku akan mengejutkanmu<br>
+      dengan kehebatanku
+    </div>
+
+    <div class="welcome">
+      WELCOME TO
+    </div>
+
+    <div class="store">
+      ALI <span>STORE</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="description">
+      Alight Creative Text Cleaner For Generator
+    </div>
 
   </div>
 
-  <div class="title">
-    TEXT CLEANER
-  </div>
 
-  <div class="subtitle">
-    Tempel source email kamu di bawah ini
-  </div>
+  <!-- TEXT CLEANER -->
+  <div class="card">
 
-  <label for="source">
-    SOURCE TEXT
-  </label>
+    <h2>TEXT CLEANER</h2>
 
-  <textarea
-    id="source"
-    placeholder="Tempel source text kamu di sini..."
-  ></textarea>
+    <div class="subtitle">
+      Tempel source email kamu di bawah ini
+    </div>
 
-  <div class="btn-group">
-    <button onclick="cleanText()">✦ GENERATE</button>
-    <button class="clear-btn" onclick="clearText()">CLEAR</button>
-  </div>
+    <label>SOURCE TEXT</label>
 
-  <div class="result-section">
+    <textarea
+      id="source"
+      placeholder="Tempel source email kamu di sini..."
+    ></textarea>
 
-    <label>
+    <div class="buttons">
+
+      <button onclick="generateText()">
+        GENERATE
+      </button>
+
+      <button
+        class="clear"
+        onclick="clearText()"
+      >
+        CLEAR
+      </button>
+
+    </div>
+
+
+    <label class="result-label">
       RESULT
     </label>
 
-    <div class="subtitle">
+    <div class="result-info">
       Link Alight Creative yang ditemukan
     </div>
 
     <div
       id="result"
-      class="result-box"
+      class="result"
     ></div>
 
     <button
-      class="copy-btn"
-      onclick="copyResult()"
+      class="copy"
+      onclick="copyText()"
     >
       COPY
     </button>
 
-  </div>
 
-  <div class="note">
-    Cleaner ini membantu membersihkan karakter tersembunyi,
-    spasi berlebihan, line break yang berantakan,
-    dan format text tertentu agar lebih mudah dibaca.
-  </div>
-
-  <div class="features">
-
-    <div class="feature">
-      <b>FAST</b>
-      <span>Cepat</span>
+    <div class="note">
+      Quoted-printable, line break, dan URL encoding
+      dibersihkan otomatis.
     </div>
 
-    <div class="feature">
-      <b>CLEAN</b>
-      <span>Bersih</span>
-    </div>
 
-    <div class="feature">
-      <b>PRIVATE</b>
-      <span>Privat</span>
+    <div class="features">
+
+      <div class="feature">
+        <strong>FAST</strong>
+        <span>Proses cepat</span>
+      </div>
+
+      <div class="feature">
+        <strong>CLEAN</strong>
+        <span>Format bersih</span>
+      </div>
+
+      <div class="feature">
+        <strong>PRIVATE</strong>
+        <span>Tidak disimpan</span>
+      </div>
+
     </div>
 
   </div>
+
 
   <footer>
-    Ali Store ♡ · TEXT CLEANER
+    ALI STORE · TEXT CLEANER
   </footer>
 
 </div>
 
+
 <script>
-function cleanText() {
 
-  const source = document.getElementById("source");
-  const result = document.getElementById("result");
+function generateText(){
 
-  let text = source.value;
+  const input =
+    document.getElementById("source").value;
 
-  if (!text.trim()) {
-    result.textContent = "";
-    return;
-  }
+  const result =
+    document.getElementById("result");
+
+  let text = input;
 
   text = text
     .replace(/[\u200B-\u200D\uFEFF]/g, "")
@@ -346,31 +457,36 @@ function cleanText() {
   result.textContent = text;
 }
 
-function clearText() {
+
+function clearText(){
 
   document.getElementById("source").value = "";
+
   document.getElementById("result").textContent = "";
 
 }
 
-function copyResult() {
 
-  const result = document.getElementById("result").textContent;
+function copyText(){
 
-  if (!result) {
-    alert("Belum ada hasil untuk dicopy.");
+  const text =
+    document.getElementById("result").textContent;
+
+  if(!text){
+    alert("Belum ada hasil.");
     return;
   }
 
-  navigator.clipboard.writeText(result)
-    .then(function() {
-      alert("Result berhasil dicopy!");
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      alert("Berhasil dicopy!");
     })
-    .catch(function() {
-      alert("Gagal menyalin result.");
+    .catch(() => {
+      alert("Gagal copy.");
     });
 
 }
+
 </script>
 
 </body>
