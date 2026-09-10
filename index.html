@@ -278,9 +278,9 @@ footer{
     </button>
 
     <div class="note">
-      Sistem akan mencari URL Alight Creative yang terdapat
-      di dalam source email. Token autentikasi tidak
-      ditampilkan atau disalin.
+      Sistem akan mencari link Alight Creative di dalam source
+      email dan membuang bagian yang tidak diperlukan. Data
+      autentikasi sensitif disamarkan.
     </div>
 
     <div class="features">
@@ -310,68 +310,75 @@ footer{
 
 <script>
 
+function decodeEmailSource(text){
+  // Normalize common quoted-printable formatting from raw email source.
+  return text
+    .replace(/=3D/gi, '=')
+    .replace(/=5C/gi, '\\')
+    .replace(/=3F/gi, '?')
+    .replace(/=26/gi, '&')
+    .replace(/=25/gi, '%')
+    .replace(/=3D/g, '=')
+    .replace(/=\r?\n/g, '');
+}
+
+function extractAlightLink(source){
+  const decoded = decodeEmailSource(source);
+
+  // Prefer an href around the Login text. This avoids unrelated URLs
+  // in headers/footer.
+  const href = decoded.match(/<a\s+href\s*=\s*[\"']([^\"']+)['\"][^>]*>\s*(?:Login ke Alight Creative|Login)[^<]*<\/a>/i);
+  if(href) return href[1];
+
+  // Fallback for a plain URL in the source.
+  const url = decoded.match(/https?:\/\/alight-creative\.firebaseapp\.com\/__\/auth\/links\?[^\s<>\"']+/i);
+  return url ? url[0] : null;
+}
+
+function sanitizeAuthLink(raw){
+  try{
+    const u = new URL(raw);
+    // The login URL contains a one-time authentication code. Keep the
+    // useful structure visible, but never expose the credential itself.
+    if(u.searchParams.has('oobCode')) u.searchParams.set('oobCode','[REDACTED]');
+    if(u.searchParams.has('apiKey')) u.searchParams.set('apiKey','[REDACTED]');
+    return u.toString();
+  }catch(e){
+    return raw;
+  }
+}
+
 function generate(){
+  const source = document.getElementById('source').value;
+  const result = document.getElementById('result');
 
-  const source =
-    document.getElementById("source").value;
-
-  const result =
-    document.getElementById("result");
-
-  /*
-    Cari link Alight Creative yang ada
-    di dalam source email.
-  */
-
-  const found =
-    source.match(
-      /https?:\/\/alight-creative\.firebaseapp\.com\/__\/auth\/links[^\s"'<>]+/i
-    );
-
-  if(!found){
-
-    result.textContent =
-      "Link Alight Creative tidak ditemukan.";
-
+  if(!source.trim()){
+    result.textContent = 'Tempel source email terlebih dahulu.';
     return;
   }
 
-  /*
-    Jangan menampilkan token autentikasi.
-    Hanya tampilkan bahwa link ditemukan.
-  */
+  const found = extractAlightLink(source);
 
-  result.textContent =
-    "Link Alight Creative ditemukan.\n\n" +
-    "Link login terdeteksi dari source email.\n" +
-    "Silakan gunakan email resmi Alight Creative untuk proses login.";
+  if(!found){
+    result.textContent = 'Link Alight Creative tidak ditemukan.';
+    return;
+  }
 
+  result.textContent = sanitizeAuthLink(found);
 }
-
 
 function clearAll(){
-
-  document.getElementById("source").value = "";
-
-  document.getElementById("result").textContent =
-    "Belum ada hasil.";
-
+  document.getElementById('source').value = '';
+  document.getElementById('result').textContent = 'Belum ada hasil.';
 }
 
-
 function copyResult(){
-
-  const text =
-    document.getElementById("result").textContent;
+  const text = document.getElementById('result').textContent;
+  if(!text || text === 'Belum ada hasil.') return;
 
   navigator.clipboard.writeText(text)
-    .then(()=>{
-      alert("Hasil berhasil dicopy.");
-    })
-    .catch(()=>{
-      alert("Gagal menyalin.");
-    });
-
+    .then(()=>alert('Hasil berhasil dicopy.'))
+    .catch(()=>alert('Gagal menyalin.'));
 }
 
 </script>
