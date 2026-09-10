@@ -1,575 +1,377 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ali Store - Text Cleaner</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali Store - Text Cleaner</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #eef6ff, #ffffff);
-      color: #111827;
-      padding: 20px;
-    }
+body {
+  background: linear-gradient(135deg, #eef5ff, #ffffff);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
 
-    .container {
-      width: 100%;
-      max-width: 600px;
-      margin: auto;
-    }
+.container {
+  background: #ffffff;
+  border-radius: 22px;
+  width: 100%;
+  max-width: 600px;
+  padding: 28px 25px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.10);
+}
 
-    .card {
-      background: white;
-      border-radius: 22px;
-      padding: 22px;
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
-    }
+.profile {
+  text-align: center;
+  margin-bottom: 25px;
+}
 
-    .profile {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+.profile img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 4px solid #1677ff;
+  display: block;
+  margin: 0 auto 14px;
+}
 
-    .profile img {
-      width: 95px;
-      height: 95px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid #1677ff;
-      margin-bottom: 12px;
-    }
+.profile h1 {
+  color: #1677ff;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
 
-    .profile h1 {
-      margin: 5px 0;
-      font-size: 22px;
-      color: #1677ff;
-    }
+.profile h2 {
+  color: #111827;
+  font-size: 25px;
+  margin-bottom: 8px;
+}
 
-    .profile h2 {
-      margin: 5px 0;
-      font-size: 25px;
-    }
+.profile p {
+  color: #718096;
+  font-size: 15px;
+  margin-bottom: 7px;
+}
 
-    .profile p {
-      margin: 8px 0 0;
-      color: #667085;
-    }
+.title {
+  color: #111827;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
+.subtitle {
+  color: #718096;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
 
-    textarea {
-      width: 100%;
-      min-height: 180px;
-      resize: vertical;
-      border: 2px solid #dbe7f5;
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 14px;
-      outline: none;
-    }
+label {
+  display: block;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
 
-    textarea:focus {
-      border-color: #1677ff;
-    }
+textarea {
+  width: 100%;
+  height: 140px;
+  padding: 15px;
+  border: 2px solid #dbe8f8;
+  border-radius: 14px;
+  font-size: 15px;
+  resize: vertical;
+  outline: none;
+  transition: 0.2s;
+}
 
-    button {
-      width: 100%;
-      border: none;
-      border-radius: 12px;
-      padding: 14px;
-      margin-top: 12px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      background: #1677ff;
-      color: white;
-    }
+textarea:focus {
+  border-color: #1677ff;
+}
 
-    button:hover {
-      opacity: 0.9;
-    }
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
 
-    .clear {
-      background: #eaf2ff;
-      color: #1677ff;
-    }
+button {
+  flex: 1;
+  padding: 13px 15px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #1677ff;
+  color: white;
+}
 
-    .result {
-      margin-top: 22px;
-    }
+button:hover {
+  opacity: 0.9;
+}
 
-    #result {
-      min-height: 130px;
-      background: #f7faff;
-      white-space: pre-wrap;
-      word-break: break-word;
-      border: 2px solid #dbe7f5;
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 14px;
-    }
+.clear-btn {
+  background: #eaf2ff;
+  color: #1677ff;
+}
 
-    .features {
-      display: flex;
-      justify-content: space-around;
-      gap: 10px;
-      margin-top: 22px;
-      text-align: center;
-    }
+.result-section {
+  margin-top: 25px;
+}
 
-    .feature {
-      flex: 1;
-      padding: 12px 5px;
-      background: #f5f9ff;
-      border-radius: 12px;
-    }
+.result-box {
+  width: 100%;
+  min-height: 120px;
+  background: #f7faff;
+  border: 2px solid #dbe8f8;
+  border-radius: 14px;
+  padding: 15px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 14px;
+  color: #111827;
+}
 
-    .feature b {
-      display: block;
-      color: #1677ff;
-      margin-bottom: 4px;
-    }
+.copy-btn {
+  width: 100%;
+  margin-top: 12px;
+}
 
-    .note {
-      margin-top: 18px;
-      padding: 14px;
-      border-radius: 12px;
-      background: #f8fafc;
-      color: #667085;
-      font-size: 12px;
-      line-height: 1.6;
-    }
+.note {
+  margin-top: 25px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #718096;
+  font-size: 13px;
+  line-height: 1.7;
+}
 
-    footer {
-      text-align: center;
-      margin-top: 18px;
-      color: #667085;
-      font-size: 13px;
-    }
+.features {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
 
-    @media (max-width: 480px) {
-      body {
-        padding: 12px;
-      }
+.feature {
+  flex: 1;
+  text-align: center;
+  background: #f5f9ff;
+  border-radius: 14px;
+  padding: 15px 5px;
+}
 
-      .card {
-        padding: 17px;
-      }
+.feature b {
+  display: block;
+  color: #1677ff;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
 
-      .profile h1 {
-        font-size: 18px;
-      }
+.feature span {
+  font-size: 14px;
+  color: #111827;
+}
 
-      .profile h2 {
-        font-size: 22px;
-      }
-    }
-  </style>
+footer {
+  text-align: center;
+  color: #718096;
+  margin-top: 25px;
+  font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .container {
+    padding: 22px 18px;
+  }
+
+  .profile h1 {
+    font-size: 17px;
+  }
+
+  .profile h2 {
+    font-size: 23px;
+  }
+
+  .features {
+    gap: 7px;
+  }
+
+  .feature {
+    padding: 13px 3px;
+  }
+
+  .feature b {
+    font-size: 18px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
-    <div class="card">
+<div class="container">
 
-      <div class="profile">
-        <img
-          src="https://files.catbox.moe/tk5k3q.jpg"
-          alt="Ali Store"
-        >
+  <div class="profile">
 
-        <h1>papipapipum aku akan mengejutkanmu dengan kehebatanku</h1>
-        <h2>WELCOME TO</h2>
-        <p>ALI STORE</p>
-        <p>♡ Alight Creative Text Cleaner For Generator ♡</p>
-      </div>
+    <img
+      src="https://files.catbox.moe/tk5k3q.jpg"
+      alt="Ali Store"
+    >
 
-      <label>TEXT CLEANER</label>
-      <p>Tempel source email kamu di bawah ini</p>
+    <h1>papipapipum aku akan mengejutkanmu dengan kehebatanku</h1>
 
-      <label>SOURCE TEXT</label>
+    <h2>WELCOME TO</h2>
 
-      <textarea
-        id="source"
-        placeholder="Tempel source text kamu di sini..."
-      ></textarea>
+    <p>ALI STORE</p>
 
-      <button onclick="cleanText()">✦ GENERATE</button>
-      <button class="clear" onclick="clearText()">CLEAR</button>
+    <p>♡ Alight Creative Text Cleaner For Generator ♡</p>
 
-      <div class="result">
-        <label>RESULT</label>
-        <p>Link Alight Creative yang ditemukan</p>
-
-        <div id="result"></div>
-
-        <button onclick="copyResult()">COPY</button>
-      </div>
-
-      <div class="note">
-        Cleaner ini membantu membersihkan karakter tersembunyi,
-        spasi berlebihan, line break yang berantakan, dan format
-        text tertentu agar lebih mudah dibaca.
-      </div>
-
-      <div class="features">
-        <div class="feature">
-          <b>FAST</b>
-          Cepat
-        </div>
-
-        <div class="feature">
-          <b>CLEAN</b>
-          Bersih
-        </div>
-
-        <div class="feature">
-          <b>PRIVATE</b>
-          Privat
-        </div>
-      </div>
-
-      <footer>
-        Ali Store  · TEXT CLEANER
-      </footer>
-
-    </div>
   </div>
 
-  <<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ali Store - Text Cleaner</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #eef6ff, #ffffff);
-      color: #111827;
-      padding: 20px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 600px;
-      margin: auto;
-    }
-
-    .card {
-      background: white;
-      border-radius: 22px;
-      padding: 22px;
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
-    }
-
-    .profile {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .profile img {
-      width: 95px;
-      height: 95px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid #1677ff;
-      margin-bottom: 12px;
-    }
-
-    .profile h1 {
-      margin: 5px 0;
-      font-size: 22px;
-      color: #1677ff;
-    }
-
-    .profile h2 {
-      margin: 5px 0;
-      font-size: 25px;
-    }
-
-    .profile p {
-      margin: 8px 0 0;
-      color: #667085;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 180px;
-      resize: vertical;
-      border: 2px solid #dbe7f5;
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 14px;
-      outline: none;
-    }
-
-    textarea:focus {
-      border-color: #1677ff;
-    }
-
-    button {
-      width: 100%;
-      border: none;
-      border-radius: 12px;
-      padding: 14px;
-      margin-top: 12px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      background: #1677ff;
-      color: white;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    .clear {
-      background: #eaf2ff;
-      color: #1677ff;
-    }
-
-    .result {
-      margin-top: 22px;
-    }
-
-    #result {
-      min-height: 130px;
-      background: #f7faff;
-      white-space: pre-wrap;
-      word-break: break-word;
-      border: 2px solid #dbe7f5;
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 14px;
-    }
-
-    .features {
-      display: flex;
-      justify-content: space-around;
-      gap: 10px;
-      margin-top: 22px;
-      text-align: center;
-    }
-
-    .feature {
-      flex: 1;
-      padding: 12px 5px;
-      background: #f5f9ff;
-      border-radius: 12px;
-    }
-
-    .feature b {
-      display: block;
-      color: #1677ff;
-      margin-bottom: 4px;
-    }
-
-    .note {
-      margin-top: 18px;
-      padding: 14px;
-      border-radius: 12px;
-      background: #f8fafc;
-      color: #667085;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 18px;
-      color: #667085;
-      font-size: 13px;
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 12px;
-      }
-
-      .card {
-        padding: 17px;
-      }
-
-      .profile h1 {
-        font-size: 18px;
-      }
-
-      .profile h2 {
-        font-size: 22px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="container">
-    <div class="card">
-
-      <div class="profile">
-        <img
-          src="https://files.catbox.moe/tk5k3q.jpg"
-          alt="Ali Store"
-        >
-
-        <h1>papipapipum aku akan mengejutkanmu dengan kehebatanku</h1>
-        <h2>WELCOME TO</h2>
-        <p>ALI STORE</p>
-        <p>♡ Alight Creative Text Cleaner For Generator ♡</p>
-      </div>
-
-      <label>TEXT CLEANER</label>
-      <p>Tempel source email kamu di bawah ini</p>
-
-      <label>SOURCE TEXT</label>
-
-      <textarea
-        id="source"
-        placeholder="Tempel source text kamu di sini..."
-      ></textarea>
-
-      <button onclick="cleanText()">✦ GENERATE</button>
-      <button class="clear" onclick="clearText()">CLEAR</button>
-
-      <div class="result">
-        <label>RESULT</label>
-        <p>Link Alight Creative yang ditemukan</p>
-
-        <div id="result"></div>
-
-        <button onclick="copyResult()">COPY</button>
-      </div>
-
-      <div class="note">
-        Cleaner ini membantu membersihkan karakter tersembunyi,
-        spasi berlebihan, line break yang berantakan, dan format
-        text tertentu agar lebih mudah dibaca.
-      </div>
-
-      <div class="features">
-        <div class="feature">
-          <b>FAST</b>
-          Cepat
-        </div>
-
-        <div class="feature">
-          <b>CLEAN</b>
-          Bersih
-        </div>
-
-        <div class="feature">
-          <b>PRIVATE</b>
-          Privat
-        </div>
-      </div>
-
-      <footer>
-        Ali Store  · TEXT CLEANER
-      </footer>
-
-    </div>
+  <div class="title">
+    TEXT CLEANER
   </div>
 
-  <script>
-    function cleanText() {
-      let text = document.getElementById("source").value;
+  <div class="subtitle">
+    Tempel source email kamu di bawah ini
+  </div>
 
-      text = text
-        .replace(/[\u200B-\u200D\uFEFF]/g, "")
-        .replace(/\r\n/g, "\n")
-        .replace(/[ \t]+/g, " ")
-        .replace(/\n{3,}/g, "\n\n")
-        .trim();
+  <label for="source">
+    SOURCE TEXT
+  </label>
 
-      document.getElementById("result").textContent = text;
-    }
+  <textarea
+    id="source"
+    placeholder="Tempel source text kamu di sini..."
+  ></textarea>
 
-    function clearText() {
-      document.getElementById("source").value = "";
-      document.getElementById("result").textContent = "";
-    }
+  <div class="btn-group">
+    <button onclick="cleanText()">✦ GENERATE</button>
+    <button class="clear-btn" onclick="clearText()">CLEAR</button>
+  </div>
 
-    function copyResult() {
-      const result = document.getElementById("result").textContent;
+  <div class="result-section">
 
-      if (!result) {
-        alert("Belum ada hasil untuk dicopy.");
-        return;
-      }
+    <label>
+      RESULT
+    </label>
 
-      navigator.clipboard.writeText(result)
-        .then(() => {
-          alert("Result berhasil dicopy!");
-        })
-        .catch(() => {
-          alert("Gagal menyalin result.");
-        });
-    }
-  </script>
+    <div class="subtitle">
+      Link Alight Creative yang ditemukan
+    </div>
+
+    <div
+      id="result"
+      class="result-box"
+    ></div>
+
+    <button
+      class="copy-btn"
+      onclick="copyResult()"
+    >
+      COPY
+    </button>
+
+  </div>
+
+  <div class="note">
+    Cleaner ini membantu membersihkan karakter tersembunyi,
+    spasi berlebihan, line break yang berantakan,
+    dan format text tertentu agar lebih mudah dibaca.
+  </div>
+
+  <div class="features">
+
+    <div class="feature">
+      <b>FAST</b>
+      <span>Cepat</span>
+    </div>
+
+    <div class="feature">
+      <b>CLEAN</b>
+      <span>Bersih</span>
+    </div>
+
+    <div class="feature">
+      <b>PRIVATE</b>
+      <span>Privat</span>
+    </div>
+
+  </div>
+
+  <footer>
+    Ali Store ♡ · TEXT CLEANER
+  </footer>
+
+</div>
+
+<script>
+function cleanText() {
+
+  const source = document.getElementById("source");
+  const result = document.getElementById("result");
+
+  let text = source.value;
+
+  if (!text.trim()) {
+    result.textContent = "";
+    return;
+  }
+
+  text = text
+    .replace(/[\u200B-\u200D\uFEFF]/g, "")
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .replace(/[ \t]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
+  result.textContent = text;
+}
+
+function clearText() {
+
+  document.getElementById("source").value = "";
+  document.getElementById("result").textContent = "";
+
+}
+
+function copyResult() {
+
+  const result = document.getElementById("result").textContent;
+
+  if (!result) {
+    alert("Belum ada hasil untuk dicopy.");
+    return;
+  }
+
+  navigator.clipboard.writeText(result)
+    .then(function() {
+      alert("Result berhasil dicopy!");
+    })
+    .catch(function() {
+      alert("Gagal menyalin result.");
+    });
+
+}
+</script>
 
 </body>
-</html>>
-    function cleanText() {
-      let text = document.getElementById("source").value;
-
-      text = text
-        .replace(/[\u200B-\u200D\uFEFF]/g, "")
-        .replace(/\r\n/g, "\n")
-        .replace(/[ \t]+/g, " ")
-        .replace(/\n{3,}/g, "\n\n")
-        .trim();
-
-      document.getElementById("result").textContent = text;
-    }
-
-    function clearText() {
-      document.getElementById("source").value = "";
-      document.getElementById("result").textContent = "";
-    }
-
-    function copyResult() {
-      const result = document.getElementById("result").textContent;
-
-      if (!result) {
-        alert("Belum ada hasil untuk dicopy.");
-        return;
-      }
-
-      navigator.clipboard.writeText(result)
-        .then(() => {
-          alert("Result berhasil dicopy!");
-        })
-        .catch(() => {
-          alert("Gagal menyalin result.");
-        });
-    }
-  </script>
-
-</body>
-          </html>
+</html>
