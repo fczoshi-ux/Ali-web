@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://files.catbox.moe" crossorigin>
+<link rel="dns-prefetch" href="//files.catbox.moe">
+<link rel="preload" as="image" href="https://files.catbox.moe/tk5k3q.jpg" fetchpriority="high">
 <title>ALI STORE - Text Cleaner</title>
 
 <style>
@@ -226,7 +229,14 @@ footer{
 <div class="container">
 
   <div class="banner">
-    <img src="https://files.catbox.moe/tk5k3q.jpg">
+    <img
+      src="https://files.catbox.moe/tk5k3q.jpg"
+      width="700"
+      height="300"
+      fetchpriority="high"
+      decoding="async"
+      alt="Ali Store banner"
+      onerror="this.style.opacity='0'">
     <div class="banner-title">Ali bnget</div>
   </div>
 
