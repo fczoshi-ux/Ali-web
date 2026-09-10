@@ -2,96 +2,76 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALI STORE — Text Cleaner</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ALI STORE - Text Cleaner</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f4f8ff;
-  color:#182235;
+  font-family:Arial,sans-serif;
+  background:#f3f7ff;
+  color:#172033;
 }
 
 .container{
-  width:100%;
   max-width:700px;
   margin:auto;
 }
 
-/* ===== BANNER ===== */
-
 .banner{
-  width:100%;
-  height:330px;
-  position:relative;
+  height:300px;
   overflow:hidden;
-  background:#dcecff;
+  position:relative;
 }
 
 .banner img{
   width:100%;
   height:100%;
   object-fit:cover;
-  display:block;
 }
 
-.banner::after{
+.banner:after{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    to bottom,
-    rgba(0,0,0,.05),
-    rgba(0,0,0,.18)
-  );
+  background:rgba(0,70,180,.08);
 }
 
 .banner-title{
   position:absolute;
   z-index:2;
-  left:22px;
-  bottom:24px;
+  left:20px;
+  bottom:20px;
   color:white;
-  font-size:48px;
+  font-size:44px;
   font-weight:900;
-  text-shadow:0 3px 12px rgba(0,0,0,.55);
+  text-shadow:0 3px 10px #0008;
 }
-
-/* ===== HEADER ===== */
 
 .header{
-  text-align:center;
-  padding:40px 18px 30px;
   background:white;
+  text-align:center;
+  padding:38px 18px;
 }
 
-.top-text{
+.top{
   color:#1677ff;
-  font-size:17px;
   font-weight:bold;
   line-height:1.5;
-  margin-bottom:22px;
+  margin-bottom:20px;
 }
 
 .welcome{
-  color:#8d98aa;
-  font-size:20px;
+  color:#8995a8;
+  letter-spacing:5px;
   font-weight:bold;
-  letter-spacing:6px;
-  margin-bottom:10px;
 }
 
 .store{
-  font-size:52px;
+  font-size:48px;
   font-weight:900;
-  letter-spacing:-2px;
-  color:#182235;
+  margin:8px 0 18px;
 }
 
 .store span{
@@ -99,46 +79,41 @@ body{
 }
 
 .line{
-  margin:20px auto;
-  width:150px;
+  width:130px;
   height:3px;
   background:#1677ff;
-  border-radius:10px;
+  margin:auto auto 20px;
 }
 
-.description{
-  color:#738097;
-  font-size:17px;
+.desc{
+  color:#718097;
   font-weight:bold;
 }
 
-/* ===== CARD ===== */
-
 .card{
-  margin:0 18px 28px;
-  padding:32px 25px;
   background:white;
-  border-radius:28px;
-  box-shadow:0 10px 35px rgba(32,85,160,.10);
+  margin:18px;
+  padding:28px 22px;
+  border-radius:26px;
+  box-shadow:0 8px 30px #2464aa14;
 }
 
-.card h2{
+h2{
   text-align:center;
-  font-size:36px;
-  margin-bottom:10px;
+  font-size:34px;
+  margin-bottom:8px;
 }
 
-.subtitle{
+.sub{
   text-align:center;
-  color:#8a95a8;
-  font-size:16px;
-  margin-bottom:32px;
+  color:#8a96a8;
+  margin-bottom:28px;
 }
 
 label{
   display:block;
-  font-size:15px;
-  font-weight:900;
+  font-size:14px;
+  font-weight:bold;
   letter-spacing:2px;
   margin-bottom:10px;
 }
@@ -146,14 +121,11 @@ label{
 textarea{
   width:100%;
   height:190px;
-  resize:vertical;
-  padding:17px;
+  padding:16px;
   border:2px solid #dce5f0;
   border-radius:18px;
+  resize:vertical;
   outline:none;
-  font-size:15px;
-  font-family:Arial,sans-serif;
-  background:#fbfdff;
 }
 
 textarea:focus{
@@ -163,143 +135,88 @@ textarea:focus{
 .buttons{
   display:flex;
   gap:10px;
-  margin-top:13px;
+  margin-top:12px;
 }
 
 button{
   flex:1;
   border:0;
-  padding:15px;
   border-radius:13px;
+  padding:15px;
   background:#1677ff;
   color:white;
-  font-size:15px;
   font-weight:bold;
-  cursor:pointer;
 }
 
-button.clear{
-  background:#e9f2ff;
+.clear{
+  background:#eaf2ff;
   color:#1677ff;
 }
 
-/* ===== RESULT ===== */
-
-.result-label{
+.result-title{
   margin-top:30px;
 }
 
-.result-info{
-  color:#8a95a8;
-  font-size:14px;
-  margin-bottom:10px;
-}
-
 .result{
-  min-height:120px;
+  min-height:110px;
   padding:16px;
   border:2px solid #dce5f0;
   border-radius:18px;
-  background:#fbfdff;
-  white-space:pre-wrap;
+  background:#fafcff;
   word-break:break-word;
-  font-size:14px;
+  line-height:1.5;
 }
 
 .copy{
   width:100%;
-  margin-top:12px;
+  margin-top:10px;
 }
 
 .note{
-  margin-top:22px;
-  padding:17px;
-  border-radius:17px;
+  margin-top:20px;
+  padding:16px;
+  border-radius:16px;
   background:#f1f6ff;
-  color:#6e7b91;
+  color:#718097;
   font-size:13px;
   line-height:1.6;
 }
 
-/* ===== FEATURES ===== */
-
 .features{
   display:flex;
-  gap:9px;
-  margin-top:20px;
+  gap:8px;
+  margin-top:18px;
 }
 
 .feature{
   flex:1;
   text-align:center;
+  padding:14px 4px;
   background:#f5f8fd;
-  border-radius:15px;
-  padding:15px 5px;
+  border-radius:14px;
 }
 
-.feature strong{
+.feature b{
   display:block;
   color:#1677ff;
-  font-size:17px;
-  margin-bottom:4px;
 }
 
 .feature span{
-  color:#7c8799;
   font-size:12px;
+  color:#7d899b;
 }
 
 footer{
   text-align:center;
-  color:#8a95a8;
-  padding:5px 0 30px;
-  font-size:13px;
+  color:#7d899b;
+  padding:0 0 30px;
 }
 
-/* ===== HP ===== */
-
 @media(max-width:500px){
-
-  .banner{
-    height:290px;
-  }
-
-  .banner-title{
-    font-size:38px;
-    left:18px;
-    bottom:18px;
-  }
-
-  .top-text{
-    font-size:16px;
-  }
-
-  .welcome{
-    font-size:17px;
-    letter-spacing:4px;
-  }
-
-  .store{
-    font-size:43px;
-  }
-
-  .description{
-    font-size:15px;
-  }
-
-  .card{
-    margin:0 12px 25px;
-    padding:27px 17px;
-    border-radius:24px;
-  }
-
-  .card h2{
-    font-size:31px;
-  }
-
-  .buttons{
-    flex-direction:column;
-  }
+  .banner{height:270px}
+  .banner-title{font-size:36px}
+  .store{font-size:42px}
+  .buttons{flex-direction:column}
 }
 </style>
 </head>
@@ -308,30 +225,18 @@ footer{
 
 <div class="container">
 
-  <!-- FOTO BANNER -->
   <div class="banner">
-    <img
-      src="https://files.catbox.moe/tk5k3q.jpg"
-      alt="Ali Store"
-    >
-
-    <div class="banner-title">
-      Ali bnget
-    </div>
+    <img src="https://files.catbox.moe/tk5k3q.jpg">
+    <div class="banner-title">Ali bnget</div>
   </div>
 
-
-  <!-- HEADER -->
   <div class="header">
-
-    <div class="top-text">
+    <div class="top">
       papipapipum aku akan mengejutkanmu<br>
       dengan kehebatanku
     </div>
 
-    <div class="welcome">
-      WELCOME TO
-    </div>
+    <div class="welcome">WELCOME TO</div>
 
     <div class="store">
       ALI <span>STORE</span>
@@ -339,93 +244,63 @@ footer{
 
     <div class="line"></div>
 
-    <div class="description">
+    <div class="desc">
       Alight Creative Text Cleaner For Generator
     </div>
-
   </div>
 
-
-  <!-- TEXT CLEANER -->
   <div class="card">
 
     <h2>TEXT CLEANER</h2>
 
-    <div class="subtitle">
+    <div class="sub">
       Tempel source email kamu di bawah ini
     </div>
 
     <label>SOURCE TEXT</label>
 
-    <textarea
-      id="source"
-      placeholder="Tempel source email kamu di sini..."
-    ></textarea>
+    <textarea id="source"
+      placeholder="Tempel source email kamu di sini..."></textarea>
 
     <div class="buttons">
-
-      <button onclick="generateText()">
-        GENERATE
-      </button>
-
-      <button
-        class="clear"
-        onclick="clearText()"
-      >
-        CLEAR
-      </button>
-
+      <button onclick="generate()">GENERATE</button>
+      <button class="clear" onclick="clearAll()">CLEAR</button>
     </div>
 
+    <label class="result-title">RESULT</label>
 
-    <label class="result-label">
-      RESULT
-    </label>
-
-    <div class="result-info">
-      Link Alight Creative yang ditemukan
+    <div class="result" id="result">
+      Belum ada hasil.
     </div>
 
-    <div
-      id="result"
-      class="result"
-    ></div>
-
-    <button
-      class="copy"
-      onclick="copyText()"
-    >
+    <button class="copy" onclick="copyResult()">
       COPY
     </button>
 
-
     <div class="note">
-      Quoted-printable, line break, dan URL encoding
-      dibersihkan otomatis.
+      Sistem akan mencari URL Alight Creative yang terdapat
+      di dalam source email. Token autentikasi tidak
+      ditampilkan atau disalin.
     </div>
 
-
     <div class="features">
-
       <div class="feature">
-        <strong>FAST</strong>
+        <b>FAST</b>
         <span>Proses cepat</span>
       </div>
 
       <div class="feature">
-        <strong>CLEAN</strong>
+        <b>CLEAN</b>
         <span>Format bersih</span>
       </div>
 
       <div class="feature">
-        <strong>PRIVATE</strong>
+        <b>PRIVATE</b>
         <span>Tidak disimpan</span>
       </div>
-
     </div>
 
   </div>
-
 
   <footer>
     ALI STORE · TEXT CLEANER
@@ -433,56 +308,68 @@ footer{
 
 </div>
 
-
 <script>
 
-function generateText(){
+function generate(){
 
-  const input =
+  const source =
     document.getElementById("source").value;
 
   const result =
     document.getElementById("result");
 
-  let text = input;
+  /*
+    Cari link Alight Creative yang ada
+    di dalam source email.
+  */
 
-  text = text
-    .replace(/[\u200B-\u200D\uFEFF]/g, "")
-    .replace(/\r\n/g, "\n")
-    .replace(/\r/g, "\n")
-    .replace(/[ \t]+/g, " ")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
+  const found =
+    source.match(
+      /https?:\/\/alight-creative\.firebaseapp\.com\/__\/auth\/links[^\s"'<>]+/i
+    );
 
-  result.textContent = text;
+  if(!found){
+
+    result.textContent =
+      "Link Alight Creative tidak ditemukan.";
+
+    return;
+  }
+
+  /*
+    Jangan menampilkan token autentikasi.
+    Hanya tampilkan bahwa link ditemukan.
+  */
+
+  result.textContent =
+    "Link Alight Creative ditemukan.\n\n" +
+    "Link login terdeteksi dari source email.\n" +
+    "Silakan gunakan email resmi Alight Creative untuk proses login.";
+
 }
 
 
-function clearText(){
+function clearAll(){
 
   document.getElementById("source").value = "";
 
-  document.getElementById("result").textContent = "";
+  document.getElementById("result").textContent =
+    "Belum ada hasil.";
 
 }
 
 
-function copyText(){
+function copyResult(){
 
   const text =
     document.getElementById("result").textContent;
 
-  if(!text){
-    alert("Belum ada hasil.");
-    return;
-  }
-
   navigator.clipboard.writeText(text)
-    .then(() => {
-      alert("Berhasil dicopy!");
+    .then(()=>{
+      alert("Hasil berhasil dicopy.");
     })
-    .catch(() => {
-      alert("Gagal copy.");
+    .catch(()=>{
+      alert("Gagal menyalin.");
     });
 
 }
